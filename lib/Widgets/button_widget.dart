@@ -19,10 +19,10 @@ class ButtonWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0),
         ),
       ),
-      child: const SizedBox(
+      child: SizedBox(
         child: Center(
-          child: Text('Commencer',
-              style: TextStyle(
+          child: Text(btnText,
+              style: const TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFFEBDBCD),
