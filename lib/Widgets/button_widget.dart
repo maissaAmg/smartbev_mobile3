@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String btnText;
   final VoidCallback onPress;
-  //final fontLoader = FontLoader('Helvetica Neue')
-  //..addFont(rootBundle.load('assets/fonts/Helvetica Neue Regular.otf'));
 
   const ButtonWidget({super.key, required this.btnText, required this.onPress});
 
@@ -26,6 +23,7 @@ class ButtonWidget extends StatelessWidget {
                 fontSize: 20.0,
                 fontWeight: FontWeight.w700,
                 color: Color(0xFFEBDBCD),
+                fontFamily: 'Helvatica Neue',
               )),
         ),
       ),

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:login/Screens/welcome_screen.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  MyApp({Key? key}) : super(key: key);
+  final fontLoader = FontLoader('Helvetica Neue')
+    ..addFont(rootBundle.load('assets/fonts/Helvetica Neue Regular.otf'));
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
