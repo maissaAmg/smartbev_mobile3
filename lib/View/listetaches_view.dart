@@ -16,16 +16,18 @@ class ListeTacheView extends StatefulWidget {
 class _ListeTacheViewState extends State<ListeTacheView> {
   @override
   Widget build(BuildContext context) {
+    Menu.buildDrawer(context);
     return Scaffold(
       backgroundColor: GlobalColor.mainColor,
       appBar: Menu(
-        title: 'Notifications',
+        title: 'Liste des taches',
         leftIcon: Icons.arrow_back_ios,
         rightIcon: Icons.menu,
         onLeftIconPressed: () => Navigator.pop(context),
         // ignore: avoid_print
         onRightIconPressed: () => print('Icon menu pressed'),
       ),
+      endDrawer: Menu.buildDrawer(context),
       body: SingleChildScrollView(
         child: Column(children: [
           const SizedBox(

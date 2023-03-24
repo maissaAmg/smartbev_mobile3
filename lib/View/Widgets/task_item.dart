@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login/Utils/global_colors.dart';
 
+// ignore: must_be_immutable
 class TaskItem extends StatefulWidget {
   final int numTask;
   final String contenu;
@@ -77,6 +78,7 @@ class _TaskItemState extends State<TaskItem> {
             flex: 2,
             child: InkWell(
               onTap: () {
+                // ignore: todo
                 // TODO: Handle checked/unchecked state
               },
               child: Container(
@@ -101,7 +103,7 @@ class _TaskItemState extends State<TaskItem> {
                               size: 18,
                             )),
                       )
-                    : Container(
+                    : SizedBox(
                         height: 30,
                         child: IconButton(
                           onPressed: () {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 // ignore: camel_case_types
 class container extends StatelessWidget {
@@ -36,8 +37,8 @@ class container extends StatelessWidget {
               ),
             ),
             Positioned.fill(
-              child: Image.asset(
-                'assets/images/maa.png',
+              child: SvgPicture.asset(
+                'assets/images/maa.svg',
               ),
             ),
           ],

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login/View/Widgets/button_widget.dart';
+import 'package:login/View/Widgets/button.dart';
 import 'package:login/View/Widgets/container.dart';
 import 'package:login/View/connexion_view.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -32,23 +33,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             alignment: const Alignment(0, 8.5),
             child: SizedBox(
               height: MediaQuery.of(context).size.height / 1.1,
+              width: MediaQuery.of(context).size.width / 1.1,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
-                    width: 293.0,
-                    height: 60.0,
-                    child: ButtonWidget(
-                      btnText: "Commencer",
-                      onPress: () {
-                        Navigator.push(
+                  ButtonGlobal(
+                    text: "Commencer",
+                    onPressed: () {
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ConnexionView(),
-                          ),
-                        );
-                      },
-                    ),
+                              builder: (context) => const ConnexionView()));
+                    },
                   ),
                 ],
               ),

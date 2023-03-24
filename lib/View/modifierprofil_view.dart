@@ -2,10 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:login/Utils/global_colors.dart';
 import 'package:login/View/Widgets/button.dart';
-import 'package:login/View/Widgets/editForm.dart';
+import 'package:login/View/Widgets/editform.dart';
 import 'package:login/View/Widgets/menu.dart';
-import 'package:login/View/Widgets/genreListe.dart';
+import 'package:login/View/Widgets/genreliste.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login/View/tache_screen.dart';
 
 class ModifierProfil extends StatefulWidget {
   const ModifierProfil({super.key});
@@ -27,6 +28,8 @@ class _ModifierProfilState extends State<ModifierProfil> {
 
   @override
   Widget build(BuildContext context) {
+    Menu.buildDrawer(context);
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: GlobalColor.mainColor,
         appBar: Menu(
@@ -37,6 +40,7 @@ class _ModifierProfilState extends State<ModifierProfil> {
           // ignore: avoid_print
           onRightIconPressed: () => print('Icon menu pressed'),
         ),
+        endDrawer: Menu.buildDrawer(context),
         body: Container(
             padding: const EdgeInsets.only(left: 16, top: 10, right: 16),
             child: GestureDetector(
@@ -45,6 +49,7 @@ class _ModifierProfilState extends State<ModifierProfil> {
               },
               child: ListView(
                 children: [
+                  SizedBox(height: screenHeight * 0.05),
                   Center(
                     child: Stack(
                       children: [
@@ -138,9 +143,15 @@ class _ModifierProfilState extends State<ModifierProfil> {
                       obscure: true),
                   const SizedBox(height: 45),
                   ButtonGlobal(
-                      text: "Enregistrer",
-                      // ignore: avoid_print
-                      onPressed: () => print("Modifier profil"))
+                    text: "Enregistrer",
+                    // ignore: avoid_print
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Tache()));
+                    },
+                  )
                 ],
               ),
             )));

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:login/Utils/global_colors.dart';
-import 'package:login/View/Widgets/TextForm.dart';
+import 'package:login/View/Widgets/textform.dart';
 import 'package:login/View/Widgets/button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:login/View/profil_screen.dart';
@@ -26,14 +26,6 @@ class ConnexionView extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /*
-              Container(
-                  alignment: Alignment.center,
-                  child: const Image(
-                    image: AssetImage('assets/logo2.png'),
-                    width: 200,
-                    height: 200,
-                  )),*/
               Container(
                 alignment: Alignment.center,
                 child: Text('Connexion',

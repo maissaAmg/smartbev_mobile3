@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login/View/Widgets/info_tache.dart';
 import 'package:login/View/Widgets/desc_tache.dart';
+import 'package:login/View/Widgets/menu.dart';
 
 const nom = "Amghar";
 const prenom = "Maissa";
@@ -14,27 +15,25 @@ class Tache extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Menu.buildDrawer(context);
     //final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      appBar: Menu(
+        title: 'Tache 2',
+        leftIcon: Icons.arrow_back_ios,
+        rightIcon: Icons.menu,
+        onLeftIconPressed: () => Navigator.pop(context),
+        // ignore: avoid_print
+        onRightIconPressed: () => print('Icon menu pressed'),
+      ),
+      endDrawer: Menu.buildDrawer(context),
       body: SafeArea(
         minimum: EdgeInsets.only(top: screenHeight * 0.05),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: screenHeight * 0.045),
-              const Center(
-                child: Text(
-                  "Tache 2",
-                  style: TextStyle(
-                    fontSize: 40.0,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Helvetica Neue',
-                  ),
-                ),
-              ),
               SizedBox(height: screenHeight * 0.04),
               const Center(
                 child: Text(
@@ -73,7 +72,7 @@ class Tache extends StatelessWidget {
               SizedBox(height: screenHeight * 0.07),
               descTache(
                   text: mdp, icon: Icons.abc_outlined, onPressed: () async {}),
-              SizedBox(height: screenHeight * 0.07),
+              SizedBox(height: screenHeight * 0.02),
             ],
           ),
         ),

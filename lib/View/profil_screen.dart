@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login/View/Widgets/button_widget.dart';
+import 'package:login/View/Widgets/button.dart';
 import 'package:login/View/Widgets/info_profil.dart';
 import 'package:login/View/modifierprofil_view.dart';
-import 'package:login/View/tache_screen.dart';
 import 'package:flutter/services.dart';
+import 'package:login/View/Widgets/menu.dart';
 
 final fontLoader = FontLoader('Helvetica Neue')
   ..addFont(rootBundle.load('assets/fonts/Helvetica Neue Regular.otf'));
@@ -23,49 +23,62 @@ class Profil extends StatelessWidget {
   Widget build(BuildContext context) {
     //final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
+    Menu.buildDrawer(context);
     return Scaffold(
+      appBar: Menu(
+        title: 'Profil',
+        leftIcon: Icons.arrow_back_ios,
+        rightIcon: Icons.menu,
+        onLeftIconPressed: () => Navigator.pop(context),
+        // ignore: avoid_print
+        onRightIconPressed: () => print('Icon menu pressed'),
+      ),
+      endDrawer: Menu.buildDrawer(context),
       body: SafeArea(
         minimum: EdgeInsets.only(top: screenHeight * 0.05),
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              SizedBox(height: screenHeight * 0.04),
-              const Text(
-                "Profil",
-                style: TextStyle(
-                  fontSize: 40.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Helvetica Neue',
-                ),
-              ),
               SizedBox(height: screenHeight * 0.03),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.1),
-                child: const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/avatar.png'),
-                  radius: 60,
-                ),
+              Container(
+                width: 130,
+                height: 130,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 2,
+                      color: Colors.white,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        color: Colors.black.withOpacity(0.1),
+                        offset: const Offset(0, 10),
+                      ),
+                    ],
+                    shape: BoxShape.circle,
+                    image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            'https://cdn.pixabay.com/photo/2016/12/19/21/36/woman-1919143_960_720.jpg'))),
               ),
               InfoCard(text: mdp, icon: Icons.lock, onPressed: () async {}),
               SizedBox(height: screenHeight * 0.1), // add some space
               SizedBox(
-                width: 293.0,
-                height: 60.0,
-                child: ButtonWidget(
-                  btnText: "Modifier",
-                  onPress: () {
+                width: 330, // set the desired width
+                height: 57,
+                child: ButtonGlobal(
+                  text: "Modifier",
+                  onPressed: () {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ModifierProfil(),
-                      ),
-                    );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ModifierProfil()));
                   },
                 ),
               ),
-              SizedBox(height: screenHeight * 0.1),
+
+              SizedBox(height: screenHeight * 0.05),
             ],
           ),
         ),

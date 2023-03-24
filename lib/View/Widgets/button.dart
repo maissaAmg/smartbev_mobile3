@@ -26,9 +26,10 @@ class ButtonGlobal extends StatelessWidget {
                 ]),
             child: Text(text,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.normal,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700,
+                  color: Color(0xFFEBDBCD),
+                  fontFamily: 'Helvatica Neue',
                 ))),
       ),
     );

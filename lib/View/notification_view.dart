@@ -15,6 +15,7 @@ class NotificationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Menu.buildDrawer(context);
     return Scaffold(
       backgroundColor: GlobalColor.mainColor,
       appBar: Menu(
@@ -25,6 +26,7 @@ class NotificationScreen extends StatelessWidget {
         // ignore: avoid_print
         onRightIconPressed: () => print('Icon menu pressed'),
       ),
+      endDrawer: Menu.buildDrawer(context),
       body: SingleChildScrollView(
         child: Column(
           children: [

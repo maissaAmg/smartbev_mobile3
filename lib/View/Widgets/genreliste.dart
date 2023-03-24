@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:login/Utils/global_colors.dart';
 
+// ignore: must_be_immutable
 class GenderList extends StatefulWidget {
   String gender;
   GenderList({super.key, required this.gender});

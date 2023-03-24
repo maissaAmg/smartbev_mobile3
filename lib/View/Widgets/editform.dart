@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:login/Utils/global_colors.dart';
 
+// ignore: must_be_immutable
 class EditForm extends StatefulWidget {
   bool showPassword = false;
   final String label;
