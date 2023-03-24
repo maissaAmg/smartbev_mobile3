@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login/Widgets/button_widget.dart';
-import 'package:login/Widgets/info_profil.dart';
-import 'package:login/Screens/tache_screen.dart';
+import 'package:login/View/Widgets/button_widget.dart';
+import 'package:login/View/Widgets/info_profil.dart';
+import 'package:login/View/modifierprofil_view.dart';
+import 'package:login/View/tache_screen.dart';
 import 'package:flutter/services.dart';
 
 final fontLoader = FontLoader('Helvetica Neue')
@@ -43,7 +44,7 @@ class Profil extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.1),
                 child: const CircleAvatar(
-                  backgroundImage: AssetImage('assets/avatar.png'),
+                  backgroundImage: AssetImage('assets/images/avatar.png'),
                   radius: 60,
                 ),
               ),
@@ -58,7 +59,7 @@ class Profil extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Tache(),
+                        builder: (context) => const ModifierProfil(),
                       ),
                     );
                   },

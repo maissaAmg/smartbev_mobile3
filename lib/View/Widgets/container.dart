@@ -37,7 +37,7 @@ class container extends StatelessWidget {
             ),
             Positioned.fill(
               child: Image.asset(
-                'assets/maa.png',
+                'assets/images/maa.png',
               ),
             ),
           ],

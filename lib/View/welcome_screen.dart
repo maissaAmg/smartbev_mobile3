@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:login/Widgets/button_widget.dart';
-import 'package:login/Widgets/container.dart';
-import 'package:login/Screens/profil_screen.dart';
+import 'package:login/View/Widgets/button_widget.dart';
+import 'package:login/View/Widgets/container.dart';
+import 'package:login/View/connexion_view.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             child: SizedBox(
               width: 292,
               height: 116,
-              child: Image.asset('assets/logo.png'),
+              child: Image.asset('assets/images/logo.png'),
             ),
           ),
           const container(), // use the ContainerWidget
@@ -44,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Profil(),
+                            builder: (context) => const ConnexionView(),
                           ),
                         );
                       },

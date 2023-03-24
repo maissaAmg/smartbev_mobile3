@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login/Widgets/info_tache.dart';
-import 'package:login/Widgets/desc_tache.dart';
+import 'package:login/View/Widgets/info_tache.dart';
+import 'package:login/View/Widgets/desc_tache.dart';
 
 const nom = "Amghar";
 const prenom = "Maissa";

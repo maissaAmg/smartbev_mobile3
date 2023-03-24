@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login/Widgets/information.dart';
+import 'package:login/View/Widgets/information.dart';
 
 // our data
 const nom = "Amghar";

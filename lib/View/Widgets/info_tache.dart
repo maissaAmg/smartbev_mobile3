@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login/Widgets/information.dart';
-import 'package:login/Widgets/toggle.dart';
+import 'package:login/View/Widgets/information.dart';
+import 'package:login/View/Widgets/toggle.dart';
 
 // our data
 const statut = "100%";
