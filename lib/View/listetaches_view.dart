@@ -34,7 +34,7 @@ class _ListeTacheViewState extends State<ListeTacheView> {
           const SizedBox(
             height: 30,
           ),
-          FilterButtons(),
+          const FilterButtons(),
 
           const SizedBox(
             height: 12,
@@ -116,7 +116,7 @@ class _ListeTacheViewState extends State<ListeTacheView> {
                 ),
                 Container(
                     padding: const EdgeInsets.all(8),
-                    child: RoundProgressBar(progress: 0.808)),
+                    child: const RoundProgressBar(progress: 0.808)),
               ],
             ),
           ),
