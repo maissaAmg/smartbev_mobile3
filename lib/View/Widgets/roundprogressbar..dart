@@ -28,13 +28,13 @@ class _RoundProgressBarState extends State<RoundProgressBar> {
           bottom: 2,
         ),
         child: CircularPercentIndicator(
-          radius: 28,
+          radius: 34,
           lineWidth: 6,
           backgroundColor: Colors.grey,
           progressColor: progressColor,
           percent: widget.progress,
           center: Text(
-            "${widget.progress * 100}%",
+            "${(widget.progress * 100.0).toStringAsFixed(1)}%",
             style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
           ),
           animation: true,

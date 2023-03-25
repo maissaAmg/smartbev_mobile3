@@ -32,10 +32,10 @@ class NotificationScreen extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-              padding: const EdgeInsets.only(top: 10, bottom: 10),
+              padding: const EdgeInsets.only(top: 20, bottom: 10),
               child: SvgPicture.asset(
                 'assets/images/cloche.svg',
-                height: 150,
+                height: 120,
               ),
             ),
             ListView.builder(

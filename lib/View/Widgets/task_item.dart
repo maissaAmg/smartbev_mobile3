@@ -56,7 +56,7 @@ class _TaskItemState extends State<TaskItem> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 3),
                 Container(
                   margin: const EdgeInsets.only(left: 14),
                   child: Text(

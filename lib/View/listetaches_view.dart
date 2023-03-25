@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login/Utils/global_colors.dart';
+import 'package:login/View/Widgets/filterButtons.dart';
 import 'package:login/View/Widgets/roundprogressbar..dart';
 import 'package:login/View/Widgets/task_item.dart';
 import 'package:login/View/Widgets/listetaches.dart';
@@ -20,7 +21,7 @@ class _ListeTacheViewState extends State<ListeTacheView> {
     return Scaffold(
       backgroundColor: GlobalColor.mainColor,
       appBar: Menu(
-        title: 'Liste des taches',
+        title: 'Liste Des Taches',
         leftIcon: Icons.arrow_back_ios,
         rightIcon: Icons.menu,
         onLeftIconPressed: () => Navigator.pop(context),
@@ -31,10 +32,94 @@ class _ListeTacheViewState extends State<ListeTacheView> {
       body: SingleChildScrollView(
         child: Column(children: [
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
-          //Progress bar
-          const RoundProgressBar(progress: 0.9),
+          FilterButtons(),
+
+          const SizedBox(
+            height: 12,
+          ),
+
+          //bar de progression et détails des taches du maintenancier
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    children: [
+                      Text(
+                        '42',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: GlobalColor.textColor,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Effectuées',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: GlobalColor.textColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Text(
+                        '10',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: GlobalColor.textColor,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'A faire',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: GlobalColor.textColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Text(
+                        '52',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: GlobalColor.textColor,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'Total',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: GlobalColor.textColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                    padding: const EdgeInsets.all(8),
+                    child: RoundProgressBar(progress: 0.808)),
+              ],
+            ),
+          ),
           //Liste des Taches
           ListView.builder(
             shrinkWrap: true,

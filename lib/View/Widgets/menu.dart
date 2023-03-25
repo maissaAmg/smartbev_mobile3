@@ -25,7 +25,6 @@ class Menu extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 65),
       color: GlobalColor.mainColor,
       child: Stack(
         children: [
