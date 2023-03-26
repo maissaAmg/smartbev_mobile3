@@ -38,12 +38,13 @@ class Profil extends StatelessWidget {
         minimum: EdgeInsets.only(top: screenHeight * 0.05),
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: screenHeight * 0.03),
-              Container(
-                width: 130,
-                height: 130,
-                decoration: BoxDecoration(
+              Center(
+                child: Container(
+                  width: 130,
+                  height: 130,
+                  decoration: BoxDecoration(
                     border: Border.all(
                       width: 2,
                       color: Colors.white,
@@ -58,26 +59,28 @@ class Profil extends StatelessWidget {
                     ],
                     shape: BoxShape.circle,
                     image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            'https://cdn.pixabay.com/photo/2016/12/19/21/36/woman-1919143_960_720.jpg'))),
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                          'https://cdn.pixabay.com/photo/2016/12/19/21/36/woman-1919143_960_720.jpg'),
+                    ),
+                  ),
+                ),
               ),
               InfoCard(text: mdp, icon: Icons.lock, onPressed: () async {}),
               SizedBox(height: screenHeight * 0.1), // add some space
               SizedBox(
-                width: 330, // set the desired width
-                height: 57,
                 child: ButtonGlobal(
                   text: "Modifier",
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ModifierProfil()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ModifierProfil(),
+                      ),
+                    );
                   },
                 ),
               ),
-
               SizedBox(height: screenHeight * 0.05),
             ],
           ),
