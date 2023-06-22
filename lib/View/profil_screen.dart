@@ -1,23 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:login/Models/my_user.dart';
+import 'package:login/Utils/token_manager.dart';
 import 'package:login/View/Widgets/button.dart';
 import 'package:login/View/Widgets/info_profil.dart';
 import 'package:login/View/modifierprofil_view.dart';
 import 'package:flutter/services.dart';
 import 'package:login/View/Widgets/menu.dart';
+import 'package:login/Services/user_service.dart';
+import 'package:login/ViewModels/user_viewmodel.dart';
+import 'package:provider/provider.dart';
+import 'package:login/Utils/user_manager.dart';
 
 final fontLoader = FontLoader('Helvetica Neue')
   ..addFont(rootBundle.load('assets/fonts/Helvetica Neue Regular.otf'));
 
-// our data
-const nom = "Amghar";
-const prenom = "Maissa";
-const email = "jm_amghar@esi.dz"; // not real number :)
-const sexe = "Femme";
-const tel = "0554094561";
-const mdp = "********";
+class Profil extends StatefulWidget {
+  Profil({Key? key}) : super(key: key);
 
-class Profil extends StatelessWidget {
-  const Profil({Key? key}) : super(key: key);
+  @override
+  State<Profil> createState() => _ProfilState();
+}
+
+class _ProfilState extends State<Profil> {
+  late UserViewModel userViewModel;
+  MyUser? myUser;
+
+  //Retrieve user information once the token isn't empty (we are connected)
+  @override
+  void initState() {
+    super.initState();
+    userViewModel = Provider.of<UserViewModel>(context, listen: false);
+    _getToken();
+  }
+
+  Future<void> _getToken() async {
+    final token = await TokenManager.getToken();
+    if (token != null && token.isNotEmpty) {
+      //print(token);
+      //print("This is the token from profil {$token}");
+      await userViewModel.getUserInfoVM(token);
+      setState(() {
+        myUser = userViewModel.user;
+        print("info user from profil");
+        print(myUser?.email);
+      });
+
+      // Check if myUser is not null before saving the information
+      if (myUser != null) {
+        await saveUserInfoManager(
+          myUser!.nom,
+          myUser!.email,
+          myUser!.mdp,
+          myUser!.prenom,
+          myUser!.sexe,
+          myUser!.id,
+          myUser!.image,
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,15 +100,26 @@ class Profil extends StatelessWidget {
                       ),
                     ],
                     shape: BoxShape.circle,
-                    image: const DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(
-                          'https://cdn.pixabay.com/photo/2016/12/19/21/36/woman-1919143_960_720.jpg'),
-                    ),
+                    image: myUser?.image != null
+                        ? DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(myUser!.image),
+                          )
+                        : const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                'https://cdn.pixabay.com/photo/2016/12/19/21/36/woman-1919143_960_720.jpg'),
+                          ),
                   ),
                 ),
               ),
-              InfoCard(text: mdp, icon: Icons.lock, onPressed: () async {}),
+              InfoCard(
+                user: myUser,
+                text: myUser?.image ?? '',
+                icon: Icons.lock,
+                onPressed: () async {},
+              ),
+
               SizedBox(height: screenHeight * 0.1), // add some space
               SizedBox(
                 child: ButtonGlobal(
@@ -75,7 +128,7 @@ class Profil extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ModifierProfil(),
+                        builder: (context) => ModifierProfil(),
                       ),
                     );
                   },

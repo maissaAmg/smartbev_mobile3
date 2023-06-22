@@ -105,7 +105,7 @@ class Menu extends StatelessWidget implements PreferredSizeWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Profil()),
+                  MaterialPageRoute(builder: (context) => Profil()),
                 );
               },
             ),

@@ -1,12 +1,36 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:login/Models/my_user.dart';
 import 'package:login/Utils/global_colors.dart';
+import 'package:login/Utils/token_manager.dart';
+import 'package:login/Utils/user_manager.dart';
 import 'package:login/View/Widgets/button.dart';
 import 'package:login/View/Widgets/editform.dart';
 import 'package:login/View/Widgets/menu.dart';
 import 'package:login/View/Widgets/genreliste.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login/View/profil_screen.dart';
 import 'package:login/View/tache_screen.dart';
+import 'package:login/Services/user_service.dart';
+
+var user = MyUser(
+    id: -1,
+    nom: "",
+    prenom: "",
+    email: "",
+    sexe: "",
+    mdp: "",
+    image:
+        "https://cdn.pixabay.com/photo/2016/12/19/21/36/woman-1919143_960_720.jpg");
+
+var _token = "";
+var _id = -1;
+var _nom = "";
+var _prenom = "";
+var _email = "";
+var _sexe = "";
+var _mdp = "";
+var _image = "";
 
 class ModifierProfil extends StatefulWidget {
   const ModifierProfil({super.key});
@@ -24,6 +48,46 @@ class _ModifierProfilState extends State<ModifierProfil> {
     }
 
     setState(() {});
+  }
+
+  //récupérer le nouveau sexe choisi par l'utilisateur
+  void onGenderChanged(String newGender) {
+    setState(() {
+      _sexe = newGender;
+    });
+  }
+
+  final TextEditingController prenomController = TextEditingController();
+  final TextEditingController nomController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController mdpController = TextEditingController();
+
+  Future<void> _getToken() async {
+    final token = await TokenManager.getToken();
+    if (token != null && token.isNotEmpty) {
+      _token = token;
+    }
+  }
+
+  Future<void> _getUserInfo() async {
+    final prefsMap = await getUserInfoManager();
+    setState(() {
+      user = MyUser.fromSharedPreferences(prefsMap);
+      _id = user.id;
+      _nom = user.nom;
+      _prenom = user.prenom;
+      _email = user.email;
+      _sexe = user.sexe;
+      _mdp = user.mdp;
+      _image = user.image;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getToken();
+    _getUserInfo();
   }
 
   @override
@@ -70,10 +134,9 @@ class _ModifierProfilState extends State<ModifierProfil> {
                                 ),
                               ],
                               shape: BoxShape.circle,
-                              image: const DecorationImage(
+                              image: DecorationImage(
                                   fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      'https://cdn.pixabay.com/photo/2016/12/19/21/36/woman-1919143_960_720.jpg'))),
+                                  image: NetworkImage(user.image))),
                         ),
                         Positioned(
                             bottom: 0,
@@ -115,7 +178,8 @@ class _ModifierProfilState extends State<ModifierProfil> {
                             padding: const EdgeInsets.only(right: 10),
                             child: EditForm(
                                 label: "Prénom",
-                                placeholder: "Maissa",
+                                placeholder: user.prenom,
+                                controller: prenomController,
                                 obscure: false)),
                       ),
                       Expanded(
@@ -123,33 +187,69 @@ class _ModifierProfilState extends State<ModifierProfil> {
                             padding: const EdgeInsets.only(left: 10),
                             child: EditForm(
                                 label: "Nom de famille",
-                                placeholder: "Amghar",
+                                placeholder: user.nom,
+                                controller: nomController,
                                 obscure: false)),
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   EditForm(
                       label: "Email",
-                      placeholder: "jm_amghar@esi.dz",
+                      placeholder: user.email,
+                      controller: emailController,
                       obscure: false),
-                  EditForm(
-                      label: "Numéro de téléphone",
-                      placeholder: "0554094561",
-                      obscure: false),
-                  GenderList(gender: "Homme"),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  GenderList(
+                    gender: user.sexe,
+                    onChanged: onGenderChanged,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   EditForm(
                       label: "Mot de passe",
-                      placeholder: "**************",
+                      placeholder: "",
+                      controller: mdpController,
                       obscure: true),
-                  const SizedBox(height: 45),
+                  const SizedBox(height: 50),
                   ButtonGlobal(
                     text: "Enregistrer",
+
                     // ignore: avoid_print
-                    onPressed: () {
+                    onPressed: () async {
+                      if (emailController.text.isNotEmpty) {
+                        _email = emailController.text;
+                      }
+                      if (mdpController.text.isNotEmpty) {
+                        _mdp = mdpController.text;
+                      }
+                      if (nomController.text.isNotEmpty) {
+                        _nom = nomController.text;
+                      }
+                      if (prenomController.text.isNotEmpty) {
+                        _prenom = prenomController.text;
+                      }
+
+                      await modifyAccount(
+                        _id,
+                        _token,
+                        _email,
+                        _mdp,
+                        _sexe,
+                        _nom,
+                        _prenom,
+                        'AM',
+                      );
+
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Tache()));
+                        context,
+                        MaterialPageRoute(builder: (context) => Profil()),
+                      );
                     },
                   )
                 ],

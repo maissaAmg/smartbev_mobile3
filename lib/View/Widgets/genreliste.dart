@@ -3,14 +3,23 @@ import 'package:login/Utils/global_colors.dart';
 
 // ignore: must_be_immutable
 class GenderList extends StatefulWidget {
-  String gender;
-  GenderList({super.key, required this.gender});
+  final String gender;
+  final Function(String) onChanged;
+  const GenderList({super.key, required this.gender, required this.onChanged});
 
   @override
   State<GenderList> createState() => _GenderListState();
 }
 
 class _GenderListState extends State<GenderList> {
+  late String _gender;
+
+  @override
+  void initState() {
+    super.initState();
+    _gender = widget.gender;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -38,15 +47,16 @@ class _GenderListState extends State<GenderList> {
                 child: Row(
                   children: [
                     Radio(
-                        value: "Homme",
-                        groupValue: widget.gender,
+                        value: "Masculin",
+                        groupValue: _gender,
                         onChanged: (value) {
                           setState(() {
-                            widget.gender = value.toString();
+                            _gender = value.toString();
+                            widget.onChanged(_gender);
                           });
                         }),
                     Text(
-                      "Homme",
+                      "Masculin",
                       style: TextStyle(
                         color: GlobalColor.textColor,
                         fontSize: 16,
@@ -60,15 +70,16 @@ class _GenderListState extends State<GenderList> {
                 child: Row(
                   children: [
                     Radio(
-                        value: "Femme",
-                        groupValue: widget.gender,
+                        value: "Féminin",
+                        groupValue: _gender,
                         onChanged: (value) {
                           setState(() {
-                            widget.gender = value.toString();
+                            _gender = value.toString();
+                            widget.onChanged(_gender);
                           });
                         }),
                     Text(
-                      "Femme",
+                      "Féminin",
                       style: TextStyle(
                         color: GlobalColor.textColor,
                         fontSize: 16,

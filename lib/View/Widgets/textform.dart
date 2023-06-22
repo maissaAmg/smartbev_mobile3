@@ -4,10 +4,10 @@ import 'package:login/Utils/global_colors.dart';
 class TextForm extends StatelessWidget {
   const TextForm(
       {super.key,
-      //required this.controller,
+      required this.controller,
       required this.textInputType,
       required this.obscure});
-  //final TextEditingController controller;
+  final TextEditingController controller;
   final TextInputType textInputType;
   final bool obscure;
 
@@ -18,7 +18,7 @@ class TextForm extends StatelessWidget {
       alignment: Alignment.center,
       height: 58,
       child: TextFormField(
-        //controller: controller,
+        controller: controller,
         keyboardType: textInputType,
         obscureText: obscure,
         decoration: InputDecoration(

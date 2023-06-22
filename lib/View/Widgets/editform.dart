@@ -9,6 +9,7 @@ class EditForm extends StatefulWidget {
   final String label;
   final String placeholder;
   final bool obscure;
+  final TextEditingController controller;
   @override
   State<StatefulWidget> createState() => _EditForm();
 
@@ -17,6 +18,7 @@ class EditForm extends StatefulWidget {
     required this.label,
     required this.placeholder,
     required this.obscure,
+    required this.controller,
   }) : super(key: key);
 }
 
@@ -27,6 +29,7 @@ class _EditForm extends State<EditForm> {
     return Container(
       padding: const EdgeInsets.only(right: 20, left: 20),
       child: TextField(
+        controller: widget.controller,
         obscureText: widget.obscure ? showPassword : false,
         decoration: InputDecoration(
             suffixIcon: widget.obscure

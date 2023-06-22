@@ -1,18 +1,27 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
+import 'package:login/Services/user_service.dart';
 import 'package:login/Utils/global_colors.dart';
 import 'package:login/View/Widgets/textform.dart';
 import 'package:login/View/Widgets/button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:login/Services/login_service.dart';
 import 'package:login/View/profil_screen.dart';
+import 'package:login/ViewModels/user_viewmodel.dart';
+import 'package:login/Models/my_user.dart';
 
-class ConnexionView extends StatelessWidget {
+class ConnexionView extends StatefulWidget {
   const ConnexionView({
     Key? key,
   }) : super(key: key);
-  //final TextEditingController emailController = TextEditingController();
-  //final TextEditingController passwordController = TextEditingController();
+
+  @override
+  State<ConnexionView> createState() => _ConnexionViewState();
+}
+
+class _ConnexionViewState extends State<ConnexionView> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +63,8 @@ class ConnexionView extends StatelessWidget {
                     )),
               ),
               const SizedBox(height: 10),
-              const TextForm(
-                //controller: emailController,
+              TextForm(
+                controller: emailController,
                 textInputType: TextInputType.emailAddress,
                 obscure: false,
               ),
@@ -70,17 +79,29 @@ class ConnexionView extends StatelessWidget {
                     )),
               ),
               const SizedBox(height: 10),
-              const TextForm(
-                //controller: passwordController,
+              TextForm(
+                controller: passwordController,
                 textInputType: TextInputType.text,
                 obscure: true,
               ),
               const SizedBox(height: 45),
               ButtonGlobal(
                 text: "Se connecter",
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Profil()));
+                onPressed: () async {
+                  final userVM = UserViewModel();
+                  var result = await userVM.loginVM(
+                      emailController.text.toString(),
+                      passwordController.text.toString());
+
+                  if (result == 'success') {
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Profil()));
+                  } else {
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Mail ou mot de passe incorrect")));
+                  }
                 },
               ),
               const SizedBox(height: 10),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:login/View/Widgets/button.dart';
 import 'package:login/View/Widgets/container.dart';
 import 'package:login/View/connexion_view.dart';
@@ -43,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ConnexionView()));
+                              builder: (context) => ConnexionView()));
                     },
                   ),
                 ],

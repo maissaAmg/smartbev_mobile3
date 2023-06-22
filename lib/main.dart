@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login/View/welcome_screen.dart';
-import 'package:login/View/listetaches_view.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'ViewModels/user_viewmodel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,18 +15,23 @@ class MyApp extends StatelessWidget {
     ..addFont(rootBundle.load('assets/fonts/Helvetica Neue Regular.otf'));
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          primaryColor: const Color(0xFFFBFCFF),
-          scaffoldBackgroundColor: const Color(0xFFEBDBCD),
-          secondaryHeaderColor: const Color(0xFFD47E3E)),
-      home: Scaffold(
-        body: StreamBuilder(
-          builder: ((context, snapshot) {
-            return const WelcomeScreen();
-          }),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserViewModel()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+            primaryColor: const Color(0xFFFBFCFF),
+            scaffoldBackgroundColor: const Color(0xFFEBDBCD),
+            secondaryHeaderColor: const Color(0xFFD47E3E)),
+        home: Scaffold(
+          body: StreamBuilder(
+            builder: ((context, snapshot) {
+              return const WelcomeScreen();
+            }),
+          ),
         ),
       ),
     );

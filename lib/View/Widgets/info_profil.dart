@@ -1,27 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:login/View/Widgets/information.dart';
+import 'package:login/Models/my_user.dart';
 
 // our data
-const nom = "Amghar";
+/*const nom = "Amghar";
 const prenom = "Maissa";
 const email = "jm_amghar@esi.dz";
-const sexe = "Femme";
+const sexe = "Femme";*/
 const tel = "0554094561";
 
 // ignore: must_be_immutable
 class InfoCard extends StatelessWidget {
   // the values we need
+  final MyUser? user;
   final String text;
   final IconData icon;
+
   Function onPressed;
 
   InfoCard(
       {super.key,
       required this.text,
       required this.icon,
-      required this.onPressed});
+      required this.onPressed,
+      required this.user});
+
   @override
   Widget build(BuildContext context) {
+    var nom = user?.prenom ?? '';
+    var prenom = user?.nom ?? '';
+    var email = user?.email ?? '';
+    var sexe = user?.sexe ?? '';
+
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       margin: EdgeInsets.only(
@@ -42,7 +52,7 @@ class InfoCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Information(text: prenom, info: 'Prénom', icon: Icons.info_outline),
           Divider(
             height: 0.5,
@@ -65,13 +75,13 @@ class InfoCard extends StatelessWidget {
             endIndent: 20,
           ),
           Information(text: sexe, info: 'Sexe', icon: Icons.info_outline),
-          Divider(
+          /*Divider(
             height: 0.5,
             color: Colors.grey,
             indent: 20,
             endIndent: 20,
           ),
-          Information(text: tel, info: 'Téléphone', icon: Icons.info_outline),
+          Information(text: tel, info: 'Téléphone', icon: Icons.info_outline),*/
         ],
       ),
     );
